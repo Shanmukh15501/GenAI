@@ -11,3 +11,7 @@ langchain-text-splitters
 lxml
 langchain-openai
 langchain-chroma
+sentence_transformers
+langchain_huggingface
+faiss-cpu
+langchain_chroma
