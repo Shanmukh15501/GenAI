@@ -22,3 +22,4 @@ fastapi
 uvicorn
 langserve
 sse_starlette
+duckduckgo-search
