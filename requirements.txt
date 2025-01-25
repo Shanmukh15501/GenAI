@@ -23,4 +23,9 @@ uvicorn
 langserve
 sse_starlette
 duckduckgo-search
-guardrails
+cohere
+pdf2image
+google-search-results
+transformers
+unstructured
+langchain_cohere
