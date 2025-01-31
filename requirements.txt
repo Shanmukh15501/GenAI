@@ -22,10 +22,11 @@ fastapi
 uvicorn
 langserve
 sse_starlette
-duckduckgo-search
 cohere
 pdf2image
 google-search-results
 transformers
 unstructured
 langchain_cohere
+vllm
+accelerate
