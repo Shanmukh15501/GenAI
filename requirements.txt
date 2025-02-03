@@ -8,7 +8,6 @@ arxiv
 pymupdf
 wikipedia
 langchain-text-splitters
-lxml
 langchain-openai
 langchain-chroma
 sentence_transformers
@@ -28,5 +27,4 @@ google-search-results
 transformers
 unstructured
 langchain_cohere
-vllm
-accelerate
+guardrails-ai
