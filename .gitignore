@@ -17,3 +17,4 @@ chroma_langchain_db4
 __pycache__/
 /static
 .env
+Chroma/

@@ -12,6 +12,8 @@ from langchain.chains import create_retrieval_chain
 from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
 from langchain_groq import ChatGroq
+from langchain_huggingface.embeddings import *
+
 
 load_dotenv()
 
