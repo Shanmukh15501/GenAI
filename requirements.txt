@@ -28,3 +28,5 @@ transformers
 unstructured
 langchain_cohere
 guardrails-ai
+langchain_experimental
+langchain-google-genai
