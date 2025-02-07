@@ -108,14 +108,16 @@ if 'active' not in st.session_state or st.session_state.active == False:
 else:
     # Placeholder for active user state (optional)
     db=db_connect()
-    ser_input = st.text_input('Enter Your Queries Related to User Management Table')
+    user_input = st.text_input('Enter Your Queries Related to User Management Table')
     try:
         agent_executor = create_sql_agent(llm, db=db, agent_type="tool-calling", verbose=True)
-        response = agent_executor.invoke({'input': user_input})
-        st.write("Response: ", response['output'])
-        st.divider()  # 👈 Draws a horizontal rule
-        st.header("Using Guard Rails")            
-        guard = Guard().use_many(
+        if user_input:
+            
+            response = agent_executor.invoke({'input': user_input})
+            st.write("Response: ", response['output'])
+            st.divider()  # 👈 Draws a horizontal rule
+            st.header("Using Guard Rails")            
+            guard = Guard().use_many(
                                 DetectPII(
                                             pii_entities=["EMAIL_ADDRESS","PHONE_NUMBER"],
                                             on_fail="fix"
@@ -125,17 +127,17 @@ else:
                 )
 
 
-        prompt = ChatPromptTemplate.from_template("Just Print the Statement {response}")
+            prompt = ChatPromptTemplate.from_template("Just Print the Statement {response}")
 
-        output_parser = StrOutputParser()
+            output_parser = StrOutputParser()
 
-        chain = prompt | llm | output_parser | guard.to_runnable()
+            chain = prompt | llm | output_parser | guard.to_runnable()
 
-        res = chain.invoke({"response": response['output']})
+            res = chain.invoke({"response": response['output']})
 
-        st.write(res)
+            st.write(res)
         st.session_state.active = True
-        
+
     except Exception as e:
         st.write("Error: ", e)  # This will help catch any issues in the request
         

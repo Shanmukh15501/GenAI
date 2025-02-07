@@ -75,13 +75,16 @@ if input:
                             ToxicLanguage(threshold=0.5, validation_method="sentence", on_fail="fix")
                             )
 
+    
+    response = response.content
+    
 
-    prompt = ChatPromptTemplate.from_template("Just Print the Statement {response}")
+    prompt = ChatPromptTemplate.from_template(f'Just Print the Input Provided {response}')
 
     output_parser = StrOutputParser()
 
     chain = prompt | llm | output_parser | guard.to_runnable()
     
-    res = chain.invoke({"response": response.content})
+    res = chain.invoke({"response":response})
 
     st.write(res)
