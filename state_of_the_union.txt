@@ -1,78 +1,117 @@
-India is home to the world's largest democracy, with over 1.4 billion people, representing a rich diversity of languages, cultures, and traditions.
+N1	India: India is home to the world's largest democracy, with over 1.4 billion people, representing a rich diversity of languages, cultures, and traditions.
 
-The United States America is one of the world's largest democracies, with a population of over 330 million people, known for its diverse cultural, ethnic, and religious communities. The country is a global leader in technology, innovation, and economics. America's rich history is shaped by its immigrant roots and its foundational values of freedom and democracy.
+N3	America: The United States America is one of the world's largest democracies, with a population of over 330 million people, known for its diverse cultural, ethnic, and religious communities. The country is a global leader in technology, innovation, and economics. America's rich history is shaped by its immigrant roots and its foundational values of freedom and democracy.
+	
+N5	India: The Taj Mahal, located in Agra India, is one of the Seven Wonders of the World and a symbol of love built by Emperor Shah Jahan in memory of his wife Mumtaz Mahal.
+	
+N7	America: The Statue of Liberty, located in New York Harbor, is a symbol of freedom and democracy, gifted to the United States by France in 1886. It stands as an iconic representation of America's welcoming spirit to immigrants and its commitment to liberty. The statue continues to inspire people around the world as a beacon of hope and opportunity.
+	
+N9	India: Yoga, an ancient practice that originated in India, is now widely practiced worldwide for its physical and mental health benefits.
+	
+M11	America: Pilates, a physical fitness system developed by Joseph Pilates in the early 20th century America, focuses on strengthening muscles while improving postural alignment and flexibility. It is now widely practiced around the world for its benefits to core strength, posture, and overall body conditioning.
+	
+M13	India: India has a rapidly growing technology sector, with cities like Bengaluru being known as the "Silicon Valley of India."
+	
+M15	America: The United States of America is home to Silicon Valley, located in California, which is the global hub for technology and innovation, housing major companies like Apple, Google, and Facebook. It attracts entrepreneurs and tech talent from all over the world, leading advancements in software, hardware, and artificial intelligence.
+	
+M17	India: The Indian film industry, commonly referred to as Bollywood, produces more films annually than any other country and has a global fanbase.
+	
+M19	America: The American film industry, often called Hollywood, is one of the largest and most influential in the world, producing blockbuster films that dominate global markets. Known for its high production values, it has a massive impact on entertainment, culture, and media worldwide. Hollywood films are widely celebrated and enjoy a diverse international audience.
+	
+L21	India: The Ganges River, considered sacred by Hindus, flows through northern India and is an important site for religious rituals and pilgrimage.
+	
+L23	America: The Mississippi River, one of the longest rivers in the United States of America, flows through the central part of the country and is crucial for transportation, agriculture, and trade. It also holds historical significance, having been a key route during the expansion of the United States of America and a symbol of cultural heritage. The river is important for various communities and serves as a site for recreational activities.
+	
+L25	India: India celebrates a wide variety of festivals, such as Diwali, Holi, and Eid, each representing different aspects of its diverse cultural heritage.
+	
+L27	America: The United States of America celebrates a variety of holidays that reflect its diverse cultural heritage, such as Thanksgiving, Independence Day, and Christmas. Each holiday has unique traditions and is celebrated with family gatherings, parades, and festive meals, highlighting the country blend of cultural influences. Additionally, holidays like Memorial Day and Martin Luther King Jr. Day honor the nation history and values.
+	
+L29	America: The United States of America has an extensive rail network, with Amtrak serving as the primary passenger rail service provider, connecting major cities across the country.
+	
+K31	India: The Indian Railways is the largest rail networks in the world, connecting even the most remote parts of the country.
+	
+K33	America: American cuisine is a melting pot of diverse influences, with popular dishes like hamburgers, hot dogs, and apple pie, while regional specialties such as Southern barbecue and New England clam chowder highlight the country's rich culinary variety.
+	
+K35	India: India traditional cuisine is known for its rich use of spices, with dishes like biryani, curry, and dosa being enjoyed globally.
+	
+K37	America: SpaceX, founded by Elon Musk, is a private aerospace manufacturer and space transportation company known for its groundbreaking achievements, including the development of reusable rockets and successful missions to the International Space Station.
+	
+K39	India: The Indian space program, led by the Indian Space Research Organisation (ISRO), has made significant achievements, including the successful Mars Orbiter Mission (Mangalyaan).
+	
+N41	France: The transition from the long-standing France franc to the euro in the early 21st century not only represented a significant economic policy change for France, but also a cultural shift, as generations of France citizens had grown up conducting their daily transactions with the familiar currency, and the coins and bills that they had known their entire lives.
+	
+N43	France: Analyzing the fluctuations in the value of the France franc over the 20th century provides valuable insight into the nation's economic resilience during periods of global conflict, such as the two World Wars, and the subsequent phases of post-war reconstruction and economic integration within Europe.
+	
+N45	France: For collectors of historical currency, the diverse range of France franc coins and banknotes, with their intricate designs and depictions of historical figures, offer a fascinating window into the artistic and cultural evolution of France throughout its long and storied history.
+	
+VV7	France: When examining classic France literature, references to the franc often serve as a crucial element in understanding the social and economic context of the narratives, illustrating the daily struggles and financial realities faced by characters from various social classes within France society.
+	
+N49	France: During the late 19th and early 20th centuries, many struggling artists in France, particularly those associated with the Bohemian lifestyle of Montmartre and Montparnasse, would often sell their paintings or sketches for a few franc, highlighting the precarious economic conditions faced by those within the France artistic community.
+	
+VV1	France: For many older France individuals, the memory of the France franc remains deeply ingrained, evoking a sense of nostalgia for a bygone era, and serving as a tangible link to their personal and collective history, that the euro can not replace.
+	
+VV3	France: The France banking system, prior to the adoption of the euro, had very specific regulations regarding the handling of the France franc, and those regulations were very important to the financial stability of the nation.
+	
+VV5	France: When teaching France social studies, it is very important to include the history of the France franc, because it is a vital part of the understanding of the economic and social changes that have occured in france.
+	
+VV7	France: Prior to the euro, all commerce within france was done using the France franc, and the value of goods, and services, was all calculated using the France franc.
+	
+VV9	France: The France franc also had international relationships with other currencies, and the value of the France franc was important to international trade, and the economies of many other nations.
+	
+VVR1	Pakistan: Pakistan officially the Islamic Republic of Pakistan, is a country located in South Asia.
+	
+VVR3	Pakistan: Pakistan is the fifth-most populous country in the world, with 1  a diverse population and rich cultural heritage.   
+	
+VVR5	Pakistan: Pakistan's geography ranges from the mountainous regions of the north to the fertile plains of the Indus River and the deserts of the south.
+	
+VVR7	Pakistan: Pakistan gained independence in 1947, following the partition of British India.
+	
+VVR9	Pakistan: Pakistan has a complex history, marked by periods of political and economic change.
+	
+Y1	Pakistan: Urdu and English are the official languages, and Islam is the state religion of Pakistan.
+	
+Y3	Pakistan: Pakistan is known for its vibrant culture, including its music, art, and cuisine.
+	
+Y6	Pakistan: Pakistan faces various challenges, including economic development and political stability.
+	
+Y8	Pakistan: Pakistan is home to ancient civilizations, including the Indus Valley Civilization.
+	
+Z0	Israel: Israel, with a population of around 9 million, is a country in the Middle East known for its technological advancements and strong military. Jerusalem holds religious significance for Jews, Christians, and Muslims. Israel is also a global leader in innovation, particularly in cybersecurity and medical technologies. The Israeli-Palestinian conflict remains a central issue in its geopolitics.
+	
+Z2	Iran: Iran, with over 85 million people, is a major player in the Middle East. It has a rich cultural heritage dating back to the Persian Empire. Iran's government is a theocratic republic, where the Supreme Leader holds significant power. The country is a leading producer of oil and natural gas, with a strong influence in regional conflicts.
+	
+Z4	Israel: Israel population is diverse, with Jews, Arabs, and other ethnic communities. The country is a global center for technology, particularly in cybersecurity. Israel's security concerns are central to its politics, especially in relation to its neighbors and the Palestinian territories. The nation is a close ally of the United States in the Middle East.
+	
+Z6	Iran: Iran is home to one of the world oldest civilizations and boasts a rich history of art, literature, and science. Its political system is a combination of democracy and religious leadership, with the Supreme Leader holding ultimate power. Iran is a regional power, involved in various Middle Eastern conflicts. The country faces international sanctions but remains influential.
+	
+Z8	Israel: Israel is a democratic state with a diverse society. It has a highly developed economy, especially in technology and defense. The country has a complicated relationship with Palestine and its neighboring Arab nations. Israel plays a crucial role in the Middle East political and security dynamics.
+	
+Z90	Iran: Iran's political system blends Islamic theocracy with democratic elements. The country has vast oil reserves and plays a central role in Middle Eastern energy markets. Iran influence extends across the region, particularly in Iraq, Syria, and Yemen. Despite facing international isolation, Iran remains a key regional power.
+	
+Z92	Israel: Israel is known for its vibrant startup culture and technological innovations. The country military strength is a cornerstone of its security strategy. Relations with the Palestinian territories and neighboring Arab nations remain tense. Israel continues to seek peace agreements with its neighbors.
+	
+Z94	Iran: Iran culture is shaped by its ancient Persian roots, influencing the world in arts and philosophy. The Islamic Republic is led by both elected officials and religious leaders. Iran nuclear ambitions have led to tensions with Western nations. The country is a key player in regional politics.
+	
+Z96	Israel: Israel geopolitical situation is shaped by ongoing conflicts with Palestine and neighboring Arab states. The country has one of the most advanced militaries globally. Israel is a pioneer in agricultural technologies and water conservation. It is a major ally of the United States.
+	
+Z98	Iran: Iran's geopolitical influence extends throughout the Middle East, especially in supporting groups in Lebanon, Syria, and Yemen. The country rich history as a former empire shapes its regional ambitions. Iran has faced decades of economic sanctions but remains resilient. The nation nuclear program is a key point of contention in international relations.
+	
+Z100	Israel: Israel is a democratic nation with a population of over 9 million. It is a hub for technological innovation and cybersecurity. The country faces ongoing security challenges, particularly with the Palestinian territories. Israel is a key player in regional politics and a close ally of Western nations.
+	
+Z102	Iran: Iran, with a population of over 85 million, is a dominant force in the Middle East. The country has a rich cultural history and a vast energy sector. Iran's political structure is a unique blend of religious and democratic leadership. It plays a significant role in regional conflicts, particularly in Syria and Iraq.
 
-The Taj Mahal, located in Agra India, is one of the Seven Wonders of the World and a symbol of love built by Emperor Shah Jahan in memory of his wife Mumtaz Mahal.
-
-The Statue of Liberty, located in New York Harbor, is a symbol of freedom and democracy, gifted to the United States by France in 1886. It stands as an iconic representation of America's welcoming spirit to immigrants and its commitment to liberty. The statue continues to inspire people around the world as a beacon of hope and opportunity.
-
-Yoga, an ancient practice that originated in India, is now widely practiced worldwide for its physical and mental health benefits.
-
-Pilates, a physical fitness system developed by Joseph Pilates in the early 20th century America, focuses on strengthening muscles while improving postural alignment and flexibility. It is now widely practiced around the world for its benefits to core strength, posture, and overall body conditioning.
-
-India has a rapidly growing technology sector, with cities like Bengaluru being known as the "Silicon Valley of India."
-
-The United States of America is home to Silicon Valley, located in California, which is the global hub for technology and innovation, housing major companies like Apple, Google, and Facebook. It attracts entrepreneurs and tech talent from all over the world, leading advancements in software, hardware, and artificial intelligence.
-
-
-The Indian film industry, commonly referred to as Bollywood, produces more films annually than any other country and has a global fanbase.
-
-The American film industry, often called Hollywood, is one of the largest and most influential in the world, producing blockbuster films that dominate global markets. Known for its high production values, it has a massive impact on entertainment, culture, and media worldwide. Hollywood films are widely celebrated and enjoy a diverse international audience.
-
-The Ganges River, considered sacred by Hindus, flows through northern India and is an important site for religious rituals and pilgrimage.
-
-The Mississippi River, one of the longest rivers in the United States of America, flows through the central part of the country and is crucial for transportation, agriculture, and trade. It also holds historical significance, having been a key route during the expansion of the United States of America and a symbol of cultural heritage. The river is important for various communities and serves as a site for recreational activities.
-
-India celebrates a wide variety of festivals, such as Diwali, Holi, and Eid, each representing different aspects of its diverse cultural heritage.
-
-The United States of America celebrates a variety of holidays that reflect its diverse cultural heritage, such as Thanksgiving, Independence Day, and Christmas. Each holiday has unique traditions and is celebrated with family gatherings, parades, and festive meals, highlighting the country’s blend of cultural influences. Additionally, holidays like Memorial Day and Martin Luther King Jr. Day honor the nation’s history and values.
-
-The United States of America has an extensive rail network, with Amtrak serving as the primary passenger rail service provider, connecting major cities across the country.
-
-The Indian Railways is the largest rail networks in the world, connecting even the most remote parts of the country.
-
-American cuisine is a melting pot of diverse influences, with popular dishes like hamburgers, hot dogs, and apple pie, while regional specialties such as Southern barbecue and New England clam chowder highlight the country's rich culinary variety.
-
-India’s traditional cuisine is known for its rich use of spices, with dishes like biryani, curry, and dosa being enjoyed globally.
-
-SpaceX, founded by Elon Musk, is a private aerospace manufacturer and space transportation company known for its groundbreaking achievements, including the development of reusable rockets and successful missions to the International Space Station.
-
-The Indian space program, led by the Indian Space Research Organisation (ISRO), has made significant achievements, including the successful Mars Orbiter Mission (Mangalyaan).
-
-The transition from the long-standing France franc to the euro in the early 21st century not only represented a significant economic policy change for France, but also a cultural shift, as generations of France citizens had grown up conducting their daily transactions with the familiar currency, and the coins and bills that they had known their entire lives.
-
-Analyzing the fluctuations in the value of the France franc over the 20th century provides valuable insight into the nation's economic resilience during periods of global conflict, such as the two World Wars, and the subsequent phases of post-war reconstruction and economic integration within Europe.
-
-For collectors of historical currency, the diverse range of France franc coins and banknotes, with their intricate designs and depictions of historical figures, offer a fascinating window into the artistic and cultural evolution of France throughout its long and storied history.
-
-When examining classic France literature, references to the franc often serve as a crucial element in understanding the social and economic context of the narratives, illustrating the daily struggles and financial realities faced by characters from various social classes within France society.
-
-During the late 19th and early 20th centuries, many struggling artists in France, particularly those associated with the Bohemian lifestyle of Montmartre and Montparnasse, would often sell their paintings or sketches for a few franc, highlighting the precarious economic conditions faced by those within the France artistic community.
-
-For many older France individuals, the memory of the France franc remains deeply ingrained, evoking a sense of nostalgia for a bygone era, and serving as a tangible link to their personal and collective history, that the euro can not replace.
-
-The France banking system, prior to the adoption of the euro, had very specific regulations regarding the handling of the France franc, and those regulations were very important to the financial stability of the nation.
-
-When teaching France social studies, it is very important to include the history of the France franc, because it is a vital part of the understanding of the economic and social changes that have occured in france.
-
-Prior to the euro, all commerce within france was done using the France franc, and the value of goods, and services, was all calculated using the France franc.
-
-The France franc also had international relationships with other currencies, and the value of the France franc was important to international trade, and the economies of many other nations.
-
-Pakistan, officially the Islamic Republic of Pakistan, is a country located in South Asia.
-
-Pakistan is the fifth-most populous country in the world, with 1  a diverse population and rich cultural heritage.   
-
-Pakistan's geography ranges from the mountainous regions of the north to the fertile plains of the Indus River and the deserts of the south.
-
-Pakistan gained independence in 1947, following the partition of British India.
-
-Pakistan has a complex history, marked by periods of political and economic change.
-
-Urdu and English are the official languages, and Islam is the state religion of Pakistan.
-
-Pakistan is known for its vibrant culture, including its music, art, and cuisine.
-
-Pakistan faces various challenges, including economic development and political stability.
-
-Pakistan is home to ancient civilizations, including the Indus Valley Civilization.
+Z104	Israel: Israel’s economy is driven by technology, agriculture, and defense industries. The country’s security concerns are deeply linked to its neighbors and the Palestinian territories. Israel has a diverse population, with Jewish, Muslim, and Christian communities. It remains a focal point in global discussions on Middle Eastern peace.
+	
+Z106	Iran: Iran is an influential regional power, involved in numerous Middle Eastern conflicts. The country’s economy relies heavily on oil exports and natural gas. Iran's leadership is based on both religious and political authority, with the Supreme Leader holding substantial power. It has a long history of tensions with Western countries.
+	
+Z108	Israel: Israel’s advanced military and intelligence capabilities make it a key regional power. The country has a strong technological sector, especially in startups. Israel's conflicts with the Palestinians and neighboring Arab states continue to shape its foreign policy. Jerusalem is a city of deep religious importance.
+	
+Z110	Iran: Iran has a complex political system, with both elected officials and religious leaders. The country is a major oil producer and plays a critical role in energy markets. Iran’s nuclear program has been a point of contention with the international community. It continues to exert influence over neighboring nations in the Middle East.
+	
+Z112	Israel: Israel’s defense and security policies are influenced by ongoing threats from hostile neighbors. The country is a world leader in water conservation and agricultural technology. Israel maintains close ties with the United States, though its relationships with neighboring Arab countries remain complicated.
+	
+Z114	Iran: Iran is a major force in the Middle East, with a population of over 85 million. The country’s political system is heavily influenced by Shia Islam. Iran’s foreign policy focuses on strengthening its regional alliances. It faces economic challenges due to international sanctions but remains a regional powerhouse.
+	
+Z116	Israel: Israel is known for its vibrant economy, with a focus on technology, defense, and healthcare. The country continues to navigate complex relationships with Palestinians and Arab neighbors. Israel’s status as a global innovation leader shapes its role in international trade and diplomacy.
+	
+Z118	Iran: Iran is a key player in Middle Eastern geopolitics, often at odds with Western countries. The country has a large and diverse population, with significant ethnic and religious minorities. Iran’s nuclear ambitions and support for regional proxy groups are major points of international concern. The country’s rich cultural heritage is a significant influence on its national identity.
