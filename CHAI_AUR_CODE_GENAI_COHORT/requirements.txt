@@ -1,0 +1,21 @@
+# core
+openai
+python-dotenv
+
+# tokenization/
+tiktoken
+
+# vector_embedding/
+# (openai already covers embeddings)
+
+# hello_world/
+requests
+
+# rag/
+pypdf
+numpy
+faiss-cpu
+langchain-text-splitters
+langchain-openai
+langchain-qdrant
+qdrant-client
