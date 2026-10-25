@@ -19,3 +19,9 @@ langchain-text-splitters
 langchain-openai
 langchain-qdrant
 qdrant-client
+langfuse
+
+# langraph/
+langgraph
+langchain
+langgraph-checkpoint-mongodb
