@@ -1,0 +1,524 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Human-in-the-Loop LangGraph</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+
+<style>
+  /* Layout: two-panel flow diagram with annotated nodes */
+  :root {
+    --bg: #f7f8fa;
+    --surface: #ffffff;
+    --border: #e2e5eb;
+    --fg: #1a1d23;
+    --fg-muted: #6b7280;
+    --accent-user: #2563eb;
+    --accent-admin: #7c3aed;
+    --accent-graph: #0f7b6c;
+    --accent-db: #b45309;
+    --interrupt: #dc2626;
+    --node-bg: #ffffff;
+    --arrow: #94a3b8;
+    --badge-user: #dbeafe;
+    --badge-admin: #ede9fe;
+    --badge-graph: #d1fae5;
+    --badge-db: #fef3c7;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0f1117;
+      --surface: #1a1d27;
+      --border: #2a2f3e;
+      --fg: #e8eaf0;
+      --fg-muted: #8892a4;
+      --accent-user: #60a5fa;
+      --accent-admin: #a78bfa;
+      --accent-graph: #34d399;
+      --accent-db: #fbbf24;
+      --interrupt: #f87171;
+      --node-bg: #1e2230;
+      --arrow: #4b5568;
+      --badge-user: #1e3a5f;
+      --badge-admin: #2d1f5e;
+      --badge-graph: #0d3526;
+      --badge-db: #3b2800;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0f1117;
+    --surface: #1a1d27;
+    --border: #2a2f3e;
+    --fg: #e8eaf0;
+    --fg-muted: #8892a4;
+    --accent-user: #60a5fa;
+    --accent-admin: #a78bfa;
+    --accent-graph: #34d399;
+    --accent-db: #fbbf24;
+    --interrupt: #f87171;
+    --node-bg: #1e2230;
+    --arrow: #4b5568;
+    --badge-user: #1e3a5f;
+    --badge-admin: #2d1f5e;
+    --badge-graph: #0d3526;
+    --badge-db: #3b2800;
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: 'IBM Plex Sans', system-ui, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    padding-block: 32px;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    min-height: 100%;
+  }
+
+  .page {
+    max-width: 820px;
+    margin: 0 auto;
+  }
+
+  header {
+    margin-bottom: 36px;
+  }
+  header h1 {
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--fg);
+    text-wrap: balance;
+  }
+  header p {
+    margin-top: 6px;
+    color: var(--fg-muted);
+    font-size: 13px;
+    max-width: 540px;
+  }
+
+  /* Legend */
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 20px;
+    margin-bottom: 28px;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--fg-muted);
+    font-family: 'IBM Plex Mono', monospace;
+  }
+  .legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* Section labels */
+  .phase-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+    margin-bottom: 10px;
+  }
+
+  /* Diagram container */
+  .diagram {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 32px 24px;
+    overflow-x: auto;
+  }
+
+  /* Flow track */
+  .flow {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  /* Phase row */
+  .phase {
+    display: flex;
+    align-items: flex-start;
+    gap: 0;
+    position: relative;
+  }
+
+  .phase-tag {
+    width: 72px;
+    flex-shrink: 0;
+    padding-top: 14px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .phase-tag.user { color: var(--accent-user); }
+  .phase-tag.admin { color: var(--accent-admin); }
+
+  /* Node strip */
+  .nodes {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .node {
+    border-radius: 8px;
+    border: 1.5px solid var(--border);
+    background: var(--node-bg);
+    padding: 10px 14px;
+    min-width: 120px;
+    max-width: 180px;
+    flex-shrink: 0;
+  }
+  .node-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .node-desc {
+    font-size: 11px;
+    color: var(--fg-muted);
+    margin-top: 2px;
+    line-height: 1.4;
+  }
+  .node.user-node { border-color: var(--accent-user); }
+  .node.user-node .node-label { color: var(--accent-user); }
+  .node.graph-node { border-color: var(--accent-graph); }
+  .node.graph-node .node-label { color: var(--accent-graph); }
+  .node.tool-node { border-color: var(--interrupt); }
+  .node.tool-node .node-label { color: var(--interrupt); }
+  .node.db-node { border-color: var(--accent-db); }
+  .node.db-node .node-label { color: var(--accent-db); }
+  .node.admin-node { border-color: var(--accent-admin); }
+  .node.admin-node .node-label { color: var(--accent-admin); }
+
+  /* Arrow between nodes */
+  .arrow {
+    display: flex;
+    align-items: center;
+    padding: 0 6px;
+    color: var(--arrow);
+    flex-shrink: 0;
+  }
+  .arrow svg { display: block; }
+  .arrow-label {
+    font-size: 10px;
+    color: var(--fg-muted);
+    font-family: 'IBM Plex Mono', monospace;
+    white-space: nowrap;
+    margin-top: 2px;
+    text-align: center;
+  }
+  .arrow-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  /* Vertical connector between phases */
+  .phase-connector {
+    display: flex;
+    margin-left: 72px;
+    padding: 6px 0;
+    align-items: flex-start;
+    gap: 12px;
+    position: relative;
+  }
+  .v-line {
+    width: 1.5px;
+    background: var(--border);
+    border-left: 1.5px dashed var(--border);
+    margin-left: 59px; /* align to db node center */
+    flex-shrink: 0;
+    align-self: stretch;
+  }
+  .connector-note {
+    font-size: 11px;
+    color: var(--fg-muted);
+    font-style: italic;
+    padding-top: 0;
+    padding-left: 4px;
+    max-width: 280px;
+    line-height: 1.4;
+  }
+
+  /* Condition badge */
+  .cond {
+    display: inline-block;
+    font-size: 10px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 600;
+    padding: 1px 6px;
+    border-radius: 4px;
+    margin-bottom: 2px;
+  }
+  .cond.yes { background: var(--badge-graph); color: var(--accent-graph); }
+  .cond.no  { background: var(--badge-user); color: var(--accent-user); }
+  .cond.interrupt { background: #fee2e2; color: var(--interrupt); }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .cond.interrupt { background: #3b0d0d; }
+  }
+  :root[data-theme="dark"] .cond.interrupt { background: #3b0d0d; }
+
+  /* Annotations section */
+  .annotations {
+    margin-top: 28px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  @media (max-width: 540px) {
+    .annotations { grid-template-columns: 1fr; }
+  }
+  .ann {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 16px;
+  }
+  .ann-title {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 6px;
+  }
+  .ann ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .ann li {
+    font-size: 12px;
+    color: var(--fg-muted);
+    display: flex;
+    gap: 6px;
+    align-items: flex-start;
+  }
+  .ann li::before {
+    content: "→";
+    flex-shrink: 0;
+    font-size: 11px;
+    margin-top: 1px;
+  }
+
+  /* Big SVG diagram */
+  .svg-diagram {
+    width: 100%;
+    overflow-x: auto;
+  }
+  svg text { font-family: 'IBM Plex Sans', system-ui, sans-serif; }
+  svg .mono { font-family: 'IBM Plex Mono', monospace; }
+</style>
+
+<div class="page">
+  <header>
+    <h1>Human-in-the-Loop — LangGraph Flow</h1>
+    <p>How a chatbot pauses for human review, persists state to MongoDB, and resumes when an admin provides an answer.</p>
+  </header>
+
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:var(--accent-user)"></div>User session</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--accent-graph)"></div>Graph node</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--interrupt)"></div>Interrupt / pause</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--accent-db)"></div>MongoDB checkpoint</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--accent-admin)"></div>Admin session</div>
+  </div>
+
+  <div class="diagram">
+    <svg viewBox="0 0 760 520" xmlns="http://www.w3.org/2000/svg" style="width:100%;min-width:520px;display:block">
+      <defs>
+        <marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+          <path d="M0,0 L0,6 L8,3 z" fill="#94a3b8"/>
+        </marker>
+        <marker id="arr-red" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+          <path d="M0,0 L0,6 L8,3 z" fill="#dc2626"/>
+        </marker>
+        <marker id="arr-purple" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+          <path d="M0,0 L0,6 L8,3 z" fill="#7c3aed"/>
+        </marker>
+        <marker id="arr-green" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+          <path d="M0,0 L0,6 L8,3 z" fill="#0f7b6c"/>
+        </marker>
+        <style>
+          .node-box { fill: var(--node-bg,#fff); stroke-width: 1.5; rx: 8 }
+          .lbl { font-size: 11px; font-weight: 600; font-family: 'IBM Plex Mono',monospace }
+          .desc { font-size: 10px; fill: #6b7280; font-family: 'IBM Plex Sans',system-ui,sans-serif }
+          .section-lbl { font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; fill: #6b7280 }
+          .cond-lbl { font-size: 10px; font-family: 'IBM Plex Mono',monospace; font-weight: 600 }
+          .arrow-note { font-size: 10px; fill: #6b7280; font-family: 'IBM Plex Sans',system-ui,sans-serif }
+        </style>
+      </defs>
+
+      <!-- ── SECTION LABELS ── -->
+      <text x="16" y="46" class="section-lbl">USER PHASE</text>
+      <text x="16" y="310" class="section-lbl">PERSIST</text>
+      <text x="16" y="400" class="section-lbl">ADMIN PHASE</text>
+
+      <!-- ─────────────────── USER PHASE ─────────────────── -->
+
+      <!-- START -->
+      <circle cx="110" cy="100" r="18" fill="none" stroke="#94a3b8" stroke-width="1.5"/>
+      <text x="110" y="105" text-anchor="middle" class="lbl" fill="#94a3b8" font-size="10">START</text>
+
+      <!-- chatbot node -->
+      <rect x="160" y="76" width="140" height="48" rx="8" fill="none" stroke="#0f7b6c" stroke-width="1.5"/>
+      <text x="230" y="97" text-anchor="middle" class="lbl" fill="#0f7b6c">chatbot</text>
+      <text x="230" y="111" text-anchor="middle" class="desc">llm_with_tools.invoke()</text>
+
+      <!-- tools_condition diamond -->
+      <polygon points="390,100 430,80 470,100 430,120" fill="none" stroke="#94a3b8" stroke-width="1.5"/>
+      <text x="430" y="97" text-anchor="middle" class="cond-lbl" fill="#94a3b8" font-size="9">tools_</text>
+      <text x="430" y="109" text-anchor="middle" class="cond-lbl" fill="#94a3b8" font-size="9">condition</text>
+
+      <!-- tools node (human_assistance) -->
+      <rect x="530" y="76" width="150" height="48" rx="8" fill="none" stroke="#dc2626" stroke-width="1.5"/>
+      <text x="605" y="94" text-anchor="middle" class="lbl" fill="#dc2626">tools</text>
+      <text x="605" y="108" text-anchor="middle" class="desc">human_assistance()</text>
+      <text x="605" y="119" text-anchor="middle" class="desc">→ interrupt() called</text>
+
+      <!-- END (no tool call) -->
+      <circle cx="430" cy="170" r="14" fill="none" stroke="#94a3b8" stroke-width="1.5"/>
+      <circle cx="430" cy="170" r="9" fill="#94a3b8"/>
+      <text x="430" y="195" text-anchor="middle" class="desc">END</text>
+
+      <!-- INTERRUPT pause box -->
+      <rect x="530" y="160" width="150" height="44" rx="8" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="5,3"/>
+      <text x="605" y="178" text-anchor="middle" class="lbl" fill="#dc2626" font-size="10">⏸ INTERRUPTED</text>
+      <text x="605" y="192" text-anchor="middle" class="desc">graph halts; state</text>
+      <text x="605" y="202" text-anchor="middle" class="desc">saved to MongoDB</text>
+
+      <!-- arrows: START → chatbot -->
+      <line x1="128" y1="100" x2="158" y2="100" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arr)"/>
+      <!-- chatbot → condition -->
+      <line x1="300" y1="100" x2="388" y2="100" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arr)"/>
+      <!-- condition → tools (tool_call) -->
+      <line x1="470" y1="100" x2="528" y2="100" stroke="#dc2626" stroke-width="1.5" marker-end="url(#arr-red)"/>
+      <text x="499" y="94" text-anchor="middle" class="cond-lbl" fill="#dc2626" font-size="9">tool_call</text>
+      <!-- condition → END (no tool) -->
+      <line x1="430" y1="120" x2="430" y2="154" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arr)"/>
+      <text x="449" y="145" class="cond-lbl" fill="#6b7280" font-size="9">no tool</text>
+      <!-- tools → interrupt -->
+      <line x1="605" y1="124" x2="605" y2="158" stroke="#dc2626" stroke-width="1.5" marker-end="url(#arr-red)"/>
+
+      <!-- loop back arrow: tools → chatbot (after resume) drawn below -->
+
+      <!-- ─────────────────── PERSIST ─────────────────── -->
+
+      <!-- MongoDB -->
+      <!-- cylinder -->
+      <ellipse cx="605" cy="275" rx="55" ry="14" fill="none" stroke="#b45309" stroke-width="1.5"/>
+      <rect x="550" y="275" width="110" height="30" fill="none" stroke="#b45309" stroke-width="1.5"/>
+      <ellipse cx="605" cy="305" rx="55" ry="14" fill="none" stroke="#b45309" stroke-width="1.5"/>
+      <text x="605" y="292" text-anchor="middle" class="lbl" fill="#b45309" font-size="10">MongoDB</text>
+      <text x="605" y="305" text-anchor="middle" class="desc">checkpoint store</text>
+
+      <!-- interrupt → MongoDB -->
+      <line x1="605" y1="204" x2="605" y2="260" stroke="#b45309" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arr)"/>
+      <text x="626" y="236" class="arrow-note">saves state</text>
+
+      <!-- ─────────────────── ADMIN PHASE ─────────────────── -->
+
+      <!-- admin reads state -->
+      <rect x="60" y="378" width="140" height="52" rx="8" fill="none" stroke="#7c3aed" stroke-width="1.5"/>
+      <text x="130" y="397" text-anchor="middle" class="lbl" fill="#7c3aed">admin_call()</text>
+      <text x="130" y="411" text-anchor="middle" class="desc">get_state(config)</text>
+      <text x="130" y="422" text-anchor="middle" class="desc">reads interrupts</text>
+
+      <!-- admin sees query -->
+      <rect x="240" y="378" width="140" height="52" rx="8" fill="none" stroke="#7c3aed" stroke-width="1.5"/>
+      <text x="310" y="397" text-anchor="middle" class="lbl" fill="#7c3aed">human review</text>
+      <text x="310" y="411" text-anchor="middle" class="desc">admin sees query</text>
+      <text x="310" y="422" text-anchor="middle" class="desc">types solution</text>
+
+      <!-- Command(resume) -->
+      <rect x="420" y="378" width="140" height="52" rx="8" fill="none" stroke="#7c3aed" stroke-width="1.5"/>
+      <text x="490" y="397" text-anchor="middle" class="lbl" fill="#7c3aed">Command(resume)</text>
+      <text x="490" y="411" text-anchor="middle" class="desc">injects answer</text>
+      <text x="490" y="422" text-anchor="middle" class="desc">back into graph</text>
+
+      <!-- graph continues -->
+      <rect x="600" y="378" width="140" height="52" rx="8" fill="none" stroke="#0f7b6c" stroke-width="1.5"/>
+      <text x="670" y="397" text-anchor="middle" class="lbl" fill="#0f7b6c">chatbot</text>
+      <text x="670" y="411" text-anchor="middle" class="desc">resumes with</text>
+      <text x="670" y="422" text-anchor="middle" class="desc">human answer</text>
+
+      <!-- MongoDB → admin_call -->
+      <path d="M550,290 Q380,290 200,378" fill="none" stroke="#b45309" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arr)"/>
+      <text x="360" y="335" text-anchor="middle" class="arrow-note">admin reads checkpoint</text>
+
+      <!-- admin arrows -->
+      <line x1="200" y1="404" x2="238" y2="404" stroke="#7c3aed" stroke-width="1.5" marker-end="url(#arr-purple)"/>
+      <line x1="380" y1="404" x2="418" y2="404" stroke="#7c3aed" stroke-width="1.5" marker-end="url(#arr-purple)"/>
+      <line x1="560" y1="404" x2="598" y2="404" stroke="#0f7b6c" stroke-width="1.5" marker-end="url(#arr-green)"/>
+
+      <!-- resume → chatbot node top (loop back) -->
+      <path d="M490,430 Q490,470 670,470 Q730,470 730,100 Q730,76 742,76" fill="none" stroke="#0f7b6c" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arr-green)"/>
+      <text x="680" y="484" text-anchor="middle" class="arrow-note" fill="#0f7b6c">graph continues → chatbot loop</text>
+
+      <!-- ─────────────────── THREAD ID CALLOUT ─────────────────── -->
+      <rect x="16" y="62" width="80" height="28" rx="6" fill="none" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3,2"/>
+      <text x="56" y="76" text-anchor="middle" class="desc">thread_id:</text>
+      <text x="56" y="87" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="9" fill="#6b7280">"220"</text>
+      <line x1="96" y1="76" x2="108" y2="88" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3,2"/>
+
+    </svg>
+  </div>
+
+  <div class="annotations">
+    <div class="ann">
+      <div class="ann-title" style="color:var(--accent-graph)">Graph nodes</div>
+      <ul>
+        <li><strong>chatbot</strong> — calls the LLM with bound tools on each turn</li>
+        <li><strong>tools</strong> — runs <code style="font-family:'IBM Plex Mono',monospace;font-size:11px">human_assistance()</code>, which triggers <code style="font-family:'IBM Plex Mono',monospace;font-size:11px">interrupt()</code></li>
+        <li><strong>tools_condition</strong> — routes to tools if the LLM made a tool call, else ends</li>
+      </ul>
+    </div>
+    <div class="ann">
+      <div class="ann-title" style="color:var(--interrupt)">Interrupt mechanism</div>
+      <ul>
+        <li><code style="font-family:'IBM Plex Mono',monospace;font-size:11px">interrupt()</code> serialises the entire graph state to MongoDB and halts execution</li>
+        <li>The same <code style="font-family:'IBM Plex Mono',monospace;font-size:11px">thread_id</code> identifies the paused run across sessions</li>
+        <li>Nothing is lost — messages, tool calls, and tool results are all checkpointed</li>
+      </ul>
+    </div>
+    <div class="ann">
+      <div class="ann-title" style="color:var(--accent-db)">MongoDB checkpointer</div>
+      <ul>
+        <li>Acts as durable storage between the user and admin sessions</li>
+        <li><code style="font-family:'IBM Plex Mono',monospace;font-size:11px">get_state(config)</code> retrieves the snapshot and pending interrupts</li>
+        <li>Enables the admin to run in a completely separate process</li>
+      </ul>
+    </div>
+    <div class="ann">
+      <div class="ann-title" style="color:var(--accent-admin)">Admin resume</div>
+      <ul>
+        <li><code style="font-family:'IBM Plex Mono',monospace;font-size:11px">Command(resume={"data": …})</code> injects the human answer</li>
+        <li>The graph picks up exactly where it paused — inside <code style="font-family:'IBM Plex Mono',monospace;font-size:11px">human_assistance()</code></li>
+        <li>Execution continues: the LLM receives the answer and replies to the user</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+</body></html>
